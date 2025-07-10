@@ -1,6 +1,7 @@
 import React from "react";
 import { CarDTO } from "../../../types/CarDTO";
-import SubmitButton from "./SubmitButton";
+import SubmitButton from "../../commonComponents/SubmitButton";
+import { useNavigate } from "react-router-dom";
 
 interface CarCardProps {
     car: CarDTO;
@@ -14,8 +15,14 @@ const translateTransmission = {
 
 const CarCard: React.FC<CarCardProps> = ({ loading, car }) => {
 
+    const navigate = useNavigate();
+
     const pictureUrl = car.media[0].url;
     const sum = car.price * 14;
+
+    const carById = () => {
+        navigate(`/car/${car.id}`);
+    };
 
     return (
         <div style={{
@@ -25,8 +32,12 @@ const CarCard: React.FC<CarCardProps> = ({ loading, car }) => {
             height: '436px',
             display: 'flex',
             gap: '24px',
-            flexDirection: 'column'
-        }}>
+            flexDirection: 'column',
+            cursor: 'pointer'
+
+        }}
+            onClick={carById}
+        >
             <div style={{ height: '220px', display: 'flex', justifyContent: 'center' }}>
                 <img src={'https://shift-intensive.ru/api' + pictureUrl} style={{ maxHeight: '220px', maxWidth: '100%', height: 'auto', borderRadius: '16px' }} />
             </div>
