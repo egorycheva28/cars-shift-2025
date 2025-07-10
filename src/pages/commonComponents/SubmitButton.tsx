@@ -1,6 +1,6 @@
-import { Button } from '@mui/material'
+import { Button, ButtonProps } from '@mui/material'
 
-interface SubmitButtonProps {
+interface SubmitButtonProps extends ButtonProps {
     text: string
     disabled?: boolean
     width?: number | string
@@ -11,7 +11,8 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({
     text,
     disabled = false,
     width = '100%',
-    height = '56px'
+    height = '56px',
+    ...props
 }) => (
     <Button
         type="submit"
@@ -38,6 +39,7 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({
                 bgcolor: '#DB0019',
             },
         }}
+        {...props}
     >
         {text}
     </Button>
