@@ -23,7 +23,7 @@ const Navbar: React.FC = () => {
                             ШИФТ RENT
                         </Typography>
                         <img
-                            src="./carIcon.png"
+                            src="../../carIcon.png"
                             style={{
                                 width: 37,
                                 height: 29.75,
@@ -37,7 +37,7 @@ const Navbar: React.FC = () => {
                                 <Button
                                     variant="outlined"
                                     startIcon={<img
-                                        src="./profileBlack.png"
+                                        src="../../profileBlack.png"
                                         alt="Профиль"
                                         style={{
                                             width: 16,
@@ -57,7 +57,7 @@ const Navbar: React.FC = () => {
                                 <Button
                                     variant="outlined"
                                     startIcon={<img
-                                        src="./rentBlack.png"
+                                        src="../../rentBlack.png"
                                         alt="Заказы"
                                         style={{
                                             width: 16,
@@ -78,7 +78,7 @@ const Navbar: React.FC = () => {
                                 <Button
                                     variant="outlined"
                                     startIcon={<img
-                                        src="./exitBlack.png"
+                                        src="../../exitBlack.png"
                                         alt="Войти"
                                         style={{
                                             width: 16,
@@ -94,7 +94,7 @@ const Navbar: React.FC = () => {
                                 <Button
                                     variant="outlined"
                                     startIcon={<img
-                                        src="./exitBlack.png"
+                                        src="../../exitBlack.png"
                                         alt="Выйти"
                                         style={{
                                             width: 16,
@@ -109,7 +109,7 @@ const Navbar: React.FC = () => {
                             )}
                             <IconButton>
                                 <img
-                                    src="./moon.png"
+                                    src="../../moon.png"
                                     alt="Выйти"
                                     style={{
                                         width: 16,
