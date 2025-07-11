@@ -1,6 +1,6 @@
-import { api } from "../axios/axios";
+import { api } from "../api";
 
-export async function createOtpCode(phone: string): Promise<any> {
+export const createOtpCode = async (phone: string): Promise<any> => {
     try {
         const response = await api.post('/auth/otp', { phone: phone });
         return response.data;

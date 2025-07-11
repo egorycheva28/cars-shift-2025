@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import CancelButton from "../commonComponents/CancelBurron";
-import InputForm from "../commonComponents/InputForm";
-import SubmitButton from "../commonComponents/SubmitButton";
+import CancelButton from "../../components/CancelBurron";
+import InputForm from "../../components/InputForm";
+import SubmitButton from "../../components/SubmitButton";
 import { CarRentalDTO } from "../../types/CarRentalDTO";
 import { useState } from "react";
 import { LocalizationProvider, DateRangePicker } from '@mui/x-date-pickers-pro';

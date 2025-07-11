@@ -6,7 +6,7 @@ import SecondStepPage from "./SecondStepPage";
 import ThirdStepPage from "./ThirdStepPage";
 import { LinearProgress } from "@mui/material";
 
-const CarRentalPage: React.FC = () => {
+const CarRentalPage = () => {
     const { id } = useParams();
 
     const [errors, setErrors] = useState<Partial<Record<keyof CarRentalDTO, string>>>({});

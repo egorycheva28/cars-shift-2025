@@ -1,49 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { CarDTO } from "../../types/CarDTO";
 import CarCard from "./components/CarCard";
-import { getListCars } from "../../api/cars/cars";
+import { getListCars } from "../../api/cars/getListCars";
 import { PaginationDTO } from "../../types/PaginationDTO";
-import InputForm from "../commonComponents/InputForm";
-import SubmitButton from "../commonComponents/SubmitButton";
+import InputForm from "../../components/InputForm";
+import SubmitButton from "../../components/SubmitButton";
 import { Slider, Tab, Tabs } from "@mui/material";
 import { FiltersDTO } from "../../types/FiltersDTO";
-import CancelButton from "../commonComponents/CancelBurron";
+import CancelButton from "../../components/CancelBurron";
+import { bodyTypeOptions, brandOptions, colors } from "../../components/Consts";
 
-const bodyTypeOptions = [
-    { value: '', label: '' },
-    { value: 'sedan', label: 'Седан' },
-    { value: 'suv', label: 'Внедорожник' },
-    { value: 'coupe', label: 'Купе' },
-    { value: 'hatchback', label: 'Хэтчбек' },
-    { value: 'cabriolet', label: 'Кабриолет' }
-];
-
-const brandOptions = [
-    { value: '', label: '' },
-    { value: 'Haval', label: 'Haval' },
-    { value: 'Hyundai', label: 'Hyundai' },
-    { value: 'Volkswagen', label: 'Volkswagen' },
-    { value: 'Kia', label: 'Kia' },
-    { value: 'Geely', label: 'Geely' },
-    { value: 'Mercedes', label: 'Mercedes' },
-    { value: 'Garden car', label: 'Садовая тачка' },
-    { value: 'Grocery cart', label: 'Продуктовая тележка' },
-    { value: 'Haier', label: 'Стиральная машина' },
-    { value: 'Invalid', label: 'Инвалидное кресло' }
-];
-
-const colors = [
-    { name: '', value: 'conic-gradient(indigo, violet,red, orange, yellow, green, blue)' },
-    { name: 'black', value: '#000000' },
-    { name: 'white', value: '#FFFFFF' },
-    { name: 'red', value: '#FF0000' },
-    { name: 'blue', value: '#0000FF' },
-    { name: 'grey', value: '#808080' },
-    { name: 'silver', value: '#C0C0C0' },
-    { name: 'orange', value: '#FFA500' }
-];
-
-const CarsListPage: React.FC = () => {
+const CarsListPage = () => {
     const [cars, setCars] = useState<CarDTO[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [pagination, setPagination] = useState<PaginationDTO>(

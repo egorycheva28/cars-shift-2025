@@ -2,7 +2,7 @@ import Router from './router/Router';
 import './App.css';
 import { BrowserRouter } from 'react-router-dom';
 
-const App: React.FC = () =>
+const App = () =>
     <BrowserRouter>
         <Router />
     </BrowserRouter>

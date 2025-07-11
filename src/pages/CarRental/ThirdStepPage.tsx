@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import CancelButton from "../commonComponents/CancelBurron";
-import SubmitButton from "../commonComponents/SubmitButton";
+import CancelButton from "../../components/CancelBurron";
+import SubmitButton from "../../components/SubmitButton";
 import { rentCar } from "../../api/cars/rentCar";
 import { useEffect, useState } from "react";
 import { CarByIdDTO } from "../../types/CarByIdDTO";
-import { getCarById } from "../../api/cars/cars";
 import { format, differenceInCalendarDays } from 'date-fns';
+import { getCarById } from "../../api/cars/getCarById";
 
 interface StepOneProps {
     carRental: {

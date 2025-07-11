@@ -1,39 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import CancelButton from "../commonComponents/CancelBurron";
-import SubmitButton from "../commonComponents/SubmitButton";
-import { getCarById } from "../../api/cars/cars";
+import CancelButton from "../../components/CancelBurron";
+import SubmitButton from "../../components/SubmitButton";
 import { CarByIdDTO } from "../../types/CarByIdDTO";
+import { getCarById } from "../../api/cars/getCarById";
+import { translateBodyType, translateColor, translateSteering, translateTransmission } from "../../components/Consts";
 
-const translateTransmission = {
-    'automatic': 'Автомат',
-    'manual': 'Механика'
-}
-
-const translateSteering = {
-    'left': 'Левый',
-    'right': 'Правый'
-}
-
-const translateBodyType = {
-    'sedan': 'Седан',
-    'suv': 'Внедорожник',
-    'coupe': 'Купе',
-    'hatchback': 'Хэтчбек',
-    'cabriolet': 'Кабриолет'
-}
-
-const translateColor = {
-    'black': 'Черный',
-    'white': 'Белый',
-    'red': 'Красный',
-    'silver': 'Серебряный',
-    'blue': 'Синий',
-    'grey': 'Серый',
-    'orange': 'Оранжевый'
-}
-
-const CarByIdPage: React.FC = () => {
+const CarByIdPage = () => {
 
     const { id } = useParams();
     const navigate = useNavigate();
@@ -70,8 +43,8 @@ const CarByIdPage: React.FC = () => {
     const getCar = async () => {
         try {
             const response = await getCarById(id);
-            const result = response.data;
-            setCar({
+            setCar(response.data);
+            /*setCar({
                 ...car,
                 id: result?.id,
                 bodyType: result?.bodyType,
@@ -84,7 +57,7 @@ const CarByIdPage: React.FC = () => {
                 steering: result?.steering,
                 transmission: result?.transmission,
                 rents: result?.rents
-            });
+            });*/
             setLoading(true);
         }
         catch (err: any) {

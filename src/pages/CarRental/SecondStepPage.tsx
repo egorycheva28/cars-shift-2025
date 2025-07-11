@@ -1,6 +1,6 @@
-import CancelButton from "../commonComponents/CancelBurron";
-import InputForm from "../commonComponents/InputForm";
-import SubmitButton from "../commonComponents/SubmitButton";
+import CancelButton from "../../components/CancelBurron";
+import InputForm from "../../components/InputForm";
+import SubmitButton from "../../components/SubmitButton";
 import { CarRentalDTO } from "../../types/CarRentalDTO";
 import { Checkbox, FormControlLabel } from "@mui/material";
 

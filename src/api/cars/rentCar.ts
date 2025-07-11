@@ -1,7 +1,7 @@
 import { CarRentalDTO } from "../../types/CarRentalDTO";
-import { api } from "../axios/axios";
+import { api } from "../api";
 
-export async function rentCar(carRentalDTO: CarRentalDTO): Promise<any> {
+export const rentCar = async (carRentalDTO: CarRentalDTO): Promise<any> => {
     try {
         const response = await api.post('/cars/rent', carRentalDTO);
         return response.data;
