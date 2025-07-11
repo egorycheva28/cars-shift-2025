@@ -22,7 +22,7 @@ const AuthPage = () => {
         setCodeRepeat(false);
     }
 
-    const createOtpCode1 = async () => {
+    const createCode = async () => {
         if (!phone) {
             setError('Поле является обязательным');
         } else {
@@ -86,9 +86,9 @@ const AuthPage = () => {
                     width="100%" />
             )}
             <div style={{ padding: '16px 0', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <SubmitButton text={isContinue ? 'Войти' : 'Продолжить'} onClick={isContinue ? login : createOtpCode1} width="100%" />
+                <SubmitButton text={isContinue ? 'Войти' : 'Продолжить'} onClick={isContinue ? login : createCode} width="100%" />
                 {isContinue && (codeRepeat ? (
-                    <CancelButton text='Запросить код ещё раз' onClick={createOtpCode1} style={{ border: 'none', background: 'none', cursor: 'pointer', display: 'flex', justifyContent: 'center', boxShadow: 'none' }} />
+                    <CancelButton text='Запросить код ещё раз' onClick={createCode} style={{ border: 'none', background: 'none', cursor: 'pointer', display: 'flex', justifyContent: 'center', boxShadow: 'none' }} />
                 ) : (
                     <span style={{ color: '#97A1AF', display: 'flex', justifyContent: 'center' }}>Запросить код повторно можно через {timer} секунд</span>
                 ))}
