@@ -100,6 +100,10 @@ const CarByIdPage: React.FC = () => {
         navigate('/cars');
     };
 
+    const rent = () => {
+        navigate(`/car/rent/${car.id}`);
+    };
+
     useEffect(() => {
         getCar();
     }, []);
@@ -194,7 +198,7 @@ const CarByIdPage: React.FC = () => {
                     </div>
                     <div style={{ display: 'flex', gap: '24px', padding: '16px 0' }}>
                         <CancelButton text="Назад" width="100%" onClick={back} />
-                        <SubmitButton text="Забронировать" width="100%" />
+                        <SubmitButton text="Забронировать" width="100%" onClick={rent} />
                     </div>
                 </div>
             </div>

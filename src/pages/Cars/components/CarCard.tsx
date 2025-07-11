@@ -24,6 +24,10 @@ const CarCard: React.FC<CarCardProps> = ({ loading, car }) => {
         navigate(`/car/${car.id}`);
     };
 
+    const rent = () => {
+        navigate(`/car/rent/${car.id}`);
+    };
+
     return (
         <div style={{
             border: 'none',
@@ -34,7 +38,6 @@ const CarCard: React.FC<CarCardProps> = ({ loading, car }) => {
             gap: '24px',
             flexDirection: 'column',
             cursor: 'pointer'
-
         }}
             onClick={carById}
         >
@@ -51,7 +54,7 @@ const CarCard: React.FC<CarCardProps> = ({ loading, car }) => {
                         <h3 style={{ color: '#141C24', margin: '0px' }}>{car.price} &#8381;</h3>
                         <span style={{ fontSize: '16px' }}>{sum} &#8381; за 14 дней</span>
                     </div>
-                    <SubmitButton text="Выбрать" disabled={loading} width="100%" />
+                    <SubmitButton text="Выбрать" disabled={loading} width="100%" onClick={(e) => { e.stopPropagation(); rent(); }} />
                 </div>
             </div>
         </div>
