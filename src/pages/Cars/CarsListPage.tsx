@@ -127,7 +127,7 @@ const CarsListPage = () => {
                     <InputForm
                         label="Даты аренды"
                         name="date"
-                        type="text"
+                        type="date"
                         value={''}
                         placeholder="Даты аренды"
                         onChange={handleChange}
