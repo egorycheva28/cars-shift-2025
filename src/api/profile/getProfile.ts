@@ -1,4 +1,4 @@
-import { apiAuth } from "../axios/axios";
+import { apiAuth } from "../api";
 
 export const getProfile = async (): Promise<any> => {
     try {

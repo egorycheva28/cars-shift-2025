@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CarRentalDTO } from "../../types/CarRentalDTO";
-import InputForm from "../commonComponents/InputForm";
+import InputForm from "../../components/InputForm";
 import { ProfileDTO } from "../../types/ProfileDTO";
-import CancelButton from "../commonComponents/CancelBurron";
-import SubmitButton from "../commonComponents/SubmitButton";
+import CancelButton from "../../components/CancelBurron";
+import SubmitButton from "../../components/SubmitButton";
 import { getProfile } from "../../api/profile/getProfile";
 import { editProfile } from "../../api/profile/editProfile";
 

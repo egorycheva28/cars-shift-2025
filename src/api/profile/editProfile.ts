@@ -1,5 +1,5 @@
 import { ProfileDTO } from "../../types/ProfileDTO";
-import { apiAuth } from "../axios/axios";
+import { apiAuth } from "../api";
 
 export const editProfile = async (profileDTO: ProfileDTO): Promise<any> => {
     const body = {
