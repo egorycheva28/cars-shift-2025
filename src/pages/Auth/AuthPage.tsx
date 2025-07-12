@@ -5,6 +5,7 @@ import InputForm from "../commonComponents/InputForm";
 import SubmitButton from "../commonComponents/SubmitButton";
 import CancelButton from "../commonComponents/CancelBurron";
 import { useNavigate } from "react-router-dom";
+import { LoginDTO } from "../../types/LoginDTO";
 
 const AuthPage = () => {
     const navigate = useNavigate();
@@ -13,7 +14,7 @@ const AuthPage = () => {
     const [isContinue, setIsContinue] = useState<boolean>(false);
     const [timer, setTimer] = useState<number>(60);
     const [codeRepeat, setCodeRepeat] = useState<boolean>(false);
-    const [error, setError] = useState<string>();
+    const [errors, setErrors] = useState<Partial<Record<keyof LoginDTO, string>>>({});
     const [click, setClick] = useState<number>(1);
 
     const startTimer = () => {
@@ -22,32 +23,47 @@ const AuthPage = () => {
         setCodeRepeat(false);
     }
 
-    const createCode = async () => {
+    const validatePhone = (): boolean => {
+        const e: typeof errors = {};
+
         if (!phone) {
-            setError('Поле является обязательным');
-        } else {
-            setError('');
-            startTimer();
-            await createOtpCode(phone);
+            e.phone = 'Поле обязательно.';
         }
+
+        setErrors(e);
+        return Object.keys(e).length === 0;
+    };
+
+    const validateCode = (): boolean => {
+        const e: typeof errors = {};
+
+        if (!otpCode || otpCode.toString().length !== 6) {
+            e.otpCode = 'Код должен содержать 6 цифр';
+        }
+
+        setErrors(e);
+        return Object.keys(e).length === 0;
+    };
+
+    const createCode = async () => {
+        if (!validatePhone()) return false;
+        startTimer();
+        await createOtpCode(phone);
     };
 
     const login = async () => {
-        if (!otpCode || otpCode.toString().length !== 6) {
-            setError('Код должен содержать 6 цифр');
+        if (!validateCode()) return false;
+
+        const result = await signin(phone, Number(otpCode));
+        if (result && result.success) {
+            setTimer(0);
+            localStorage.setItem('token', result.token);
+            navigate('/cars');
         }
         else {
-            const result = await signin(phone, Number(otpCode));
-            setError('');
-            if (result && result.success) {
-                setTimer(0);
-                localStorage.setItem('token', result.token);
-                navigate('/cars');
-            }
-            else {
-                setClick(click + 1);
-            }
+            setClick(click + 1);
         }
+
     };
 
     useEffect(() => {
@@ -62,7 +78,6 @@ const AuthPage = () => {
 
     return (
         <div style={{ position: 'relative', top: 125, display: 'flex', flexDirection: 'column', gap: '24px', padding: '0 240px', width: '400px' }}>
-            {error && <div style={{ color: "red" }}>{error}</div>}
             <h2 style={{ margin: 0, color: '#141C24' }}>Авторизация</h2>
             <span style={{ color: '#141C24', fontSize: '16px' }}>Введите {isContinue ? 'проверочный код' : 'номер телефона'} для входа в личный кабинет</span>
             <InputForm
@@ -72,7 +87,8 @@ const AuthPage = () => {
                 value={phone || ''}
                 placeholder="Телефон"
                 onChange={(e) => setPhone(e.target.value)}
-                helperText={''}
+                error={!!errors.phone}
+                helperText={errors.phone}
                 width="100%" />
             {isContinue && (
                 <InputForm
@@ -82,7 +98,8 @@ const AuthPage = () => {
                     value={otpCode || ''}
                     placeholder="Проверочный код"
                     onChange={(e) => setOtpCode(e.target.value)}
-                    helperText={''}
+                    error={!!errors.otpCode}
+                    helperText={errors.otpCode}
                     width="100%" />
             )}
             <div style={{ padding: '16px 0', display: 'flex', flexDirection: 'column', gap: '8px' }}>

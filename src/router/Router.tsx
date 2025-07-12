@@ -6,6 +6,7 @@ import CarByIdPage from '../pages/Cars/CarByIdPage';
 import CarRentalPage from '../pages/CarRental/CarRentalPage';
 import CarRentPage from '../pages/CarRental/CarRentPage';
 import AuthPage from '../pages/Auth/AuthPage';
+import ProfilePage from '../pages/Profile/ProfilePage';
 
 const Router: React.FC = () => {
 
@@ -19,6 +20,7 @@ const Router: React.FC = () => {
                 <Route path="/car/rent/:id" element={<CarRentalPage />} />
                 <Route path="/car/rent" element={<CarRentPage />} />
                 <Route path="/login" element={<AuthPage />} />
+                <Route path="/profile" element={<ProfilePage />} />
             </Routes>
         </>
     );
