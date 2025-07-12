@@ -1,14 +1,9 @@
-import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import CancelButton from "../commonComponents/CancelBurron";
-import SubmitButton from "../commonComponents/SubmitButton";
+import CancelButton from "../../components/CancelBurron";
+import SubmitButton from "../../components/SubmitButton";
+import { translateStatus } from "../../components/Consts";
 
-const translateStatus: { [key: number]: string } = {
-    0: 'Создано',
-    1: 'Активно'
-}
-
-const CarRentPage: React.FC = () => {
+const CarRentPage = () => {
     const location = useLocation();
     const carRental = location.state;
     const navigate = useNavigate();

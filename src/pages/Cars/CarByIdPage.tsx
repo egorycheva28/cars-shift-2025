@@ -1,39 +1,12 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import CancelButton from "../commonComponents/CancelBurron";
-import SubmitButton from "../commonComponents/SubmitButton";
-import { getCarById } from "../../api/cars/cars";
+import CancelButton from "../../components/CancelBurron";
+import SubmitButton from "../../components/SubmitButton";
 import { CarByIdDTO } from "../../types/CarByIdDTO";
+import { getCarById } from "../../api/cars/getCarById";
+import { translateBodyType, translateColor, translateSteering, translateTransmission } from "../../components/Consts";
 
-const translateTransmission = {
-    'automatic': 'Автомат',
-    'manual': 'Механика'
-}
-
-const translateSteering = {
-    'left': 'Левый',
-    'right': 'Правый'
-}
-
-const translateBodyType = {
-    'sedan': 'Седан',
-    'suv': 'Внедорожник',
-    'coupe': 'Купе',
-    'hatchback': 'Хэтчбек',
-    'cabriolet': 'Кабриолет'
-}
-
-const translateColor = {
-    'black': 'Черный',
-    'white': 'Белый',
-    'red': 'Красный',
-    'silver': 'Серебряный',
-    'blue': 'Синий',
-    'grey': 'Серый',
-    'orange': 'Оранжевый'
-}
-
-const CarByIdPage: React.FC = () => {
+const CarByIdPage = () => {
 
     const { id } = useParams();
     const navigate = useNavigate();
@@ -54,37 +27,20 @@ const CarByIdPage: React.FC = () => {
         }
     );
 
-    const getDateParts = (timestamp: number): string => {
-        const date = new Date(timestamp);
-        const day = date.getDate();
-        const month = date.toLocaleString('ru-RU', { month: 'long' });
-        return `${day} ${month}`;
-    };
-
-    const getDaysDifference = (start: number, end: number) => {
-        const msPerDay = 1000 * 60 * 60 * 24;
-        const diffInMs = end - start;
-        return Math.round(diffInMs / msPerDay);
-    };
+    const today = new Date();
+    const futureDate = new Date();
+    futureDate.setDate(today.getDate() + 7);
+    const formatter = new Intl.DateTimeFormat('ru-RU', {
+        day: 'numeric',
+        month: 'long',
+    });
+    const formattedToday = formatter.format(today);
+    const formattedFutureDate = formatter.format(futureDate);
 
     const getCar = async () => {
         try {
             const response = await getCarById(id);
-            const result = response.data;
-            setCar({
-                ...car,
-                id: result?.id,
-                bodyType: result?.bodyType,
-                brand: result?.brand,
-                color: result?.color,
-                location: result?.location,
-                media: result?.media,
-                name: result?.name,
-                price: result?.price,
-                steering: result?.steering,
-                transmission: result?.transmission,
-                rents: result?.rents
-            });
+            setCar(response.data);
             setLoading(true);
         }
         catch (err: any) {
@@ -180,19 +136,14 @@ const CarByIdPage: React.FC = () => {
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
                             <h2 style={{ color: '#141C24', margin: 0 }}>Стоимость</h2>
                             <div style={{ border: '1px solid #E3E5E5' }}></div>
-                            {car.rents.length > 1 && (
-                                <div>
-                                    <div style={{ display: 'flex', flexDirection: 'row', gap: '24px', height: 'auto', width: '100%' }}>
-                                        <span style={{ color: '#141C24', fontSize: '16px', width: '50%' }}>Аренда на {getDaysDifference(car.rents[0].startDate, car.rents[0].endDate)} дней</span>
-                                        <span style={{ color: '#141C24', fontSize: '16px', width: '50%' }}>{getDateParts(car.rents[0].startDate)} - {getDateParts(car.rents[0].endDate)}</span>
-                                    </div>
-
-                                    <div style={{ border: '1px solid #E3E5E5' }}></div>
-                                </div>
-                            )}
+                            <div style={{ display: 'flex', flexDirection: 'row', gap: '24px', height: 'auto', width: '100%' }}>
+                                <span style={{ color: '#141C24', fontSize: '16px', width: '50%' }}>Аренда на 7 дней</span>
+                                <span style={{ color: '#141C24', fontSize: '16px', width: '50%' }}>{formattedToday} - {formattedFutureDate}</span>
+                            </div>
+                            <div style={{ border: '1px solid #E3E5E5' }}></div>
                             <div style={{ display: 'flex', flexDirection: 'row', gap: '24px', height: 'auto', width: '100%' }}>
                                 <h3 style={{ color: '#141C24', fontSize: '16px', width: '50%', margin: 0 }}>Итого</h3>
-                                <h3 style={{ color: '#141C24', fontSize: '16px', width: '50%', margin: 0 }}>{car.price} &#8381;</h3>
+                                <h3 style={{ color: '#141C24', fontSize: '16px', width: '50%', margin: 0 }}>{car.price * 7} &#8381;</h3>
                             </div>
                         </div>
                     </div>

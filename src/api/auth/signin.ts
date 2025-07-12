@@ -1,6 +1,6 @@
-import { api } from "../axios/axios";
+import { api } from "../api";
 
-export async function signin(phone: string | undefined, code: number): Promise<any> {
+export const signin = async (phone: string | undefined, code: number): Promise<any> => {
     try {
         const response = await api.post('/users/signin', { phone: phone, code: code });
         return response.data;

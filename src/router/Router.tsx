@@ -1,4 +1,3 @@
-import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from '../navbar/Navbar';
 import CarsListPage from '../pages/Cars/CarsListPage';
@@ -8,7 +7,7 @@ import CarRentPage from '../pages/CarRental/CarRentPage';
 import AuthPage from '../pages/Auth/AuthPage';
 import ProfilePage from '../pages/Profile/ProfilePage';
 
-const Router: React.FC = () => {
+const Router = () => {
 
     return (
         <>

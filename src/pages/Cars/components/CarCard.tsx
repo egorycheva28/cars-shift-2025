@@ -1,16 +1,12 @@
 import React from "react";
 import { CarDTO } from "../../../types/CarDTO";
-import SubmitButton from "../../commonComponents/SubmitButton";
+import SubmitButton from "../../../components/SubmitButton";
 import { useNavigate } from "react-router-dom";
+import { translateTransmission } from "../../../components/Consts";
 
 interface CarCardProps {
     car: CarDTO;
     loading: boolean;
-}
-
-const translateTransmission = {
-    'automatic': 'Автомат',
-    'manual': 'Механика'
 }
 
 const CarCard: React.FC<CarCardProps> = ({ loading, car }) => {

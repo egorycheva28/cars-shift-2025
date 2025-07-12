@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { createOtpCode } from "../../api/auth/createOtpCode";
 import { signin } from "../../api/auth/signin";
-import InputForm from "../commonComponents/InputForm";
-import SubmitButton from "../commonComponents/SubmitButton";
-import CancelButton from "../commonComponents/CancelBurron";
+import InputForm from "../../components/InputForm";
+import SubmitButton from "../../components/SubmitButton";
+import CancelButton from "../../components/CancelBurron";
 import { useNavigate } from "react-router-dom";
 import { LoginDTO } from "../../types/LoginDTO";
 

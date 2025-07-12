@@ -1,8 +1,7 @@
 import { FiltersDTO } from "../../types/FiltersDTO";
-import { api } from "../axios/axios";
-import { apiAuth } from "../axios/axios";
+import { api } from "../api";
 
-export async function getListCars(filters: FiltersDTO): Promise<any> {
+export const getListCars = async (filters: FiltersDTO): Promise<any> => {
     try {
         const params: Record<string, any> = {};
 
@@ -23,20 +22,6 @@ export async function getListCars(filters: FiltersDTO): Promise<any> {
         if (error.response) {
             const { status, data } = error.response;
             throw new Error(`Ошибка получения списка автомобилей (${status}): ${JSON.stringify(data)}`);
-        }
-        throw new Error(error.message);
-    }
-}
-
-export async function getCarById(carId: string | undefined): Promise<any> {
-    try {
-        const response = await api.get(`/cars/info/${carId}`);
-        return response.data;
-    }
-    catch (error: any) {
-        if (error.response) {
-            const { status, data } = error.response;
-            throw new Error(`Ошибка получения автомобия (${status}): ${JSON.stringify(data)}`);
         }
         throw new Error(error.message);
     }

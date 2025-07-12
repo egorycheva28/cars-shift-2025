@@ -1,4 +1,3 @@
-import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -6,8 +5,9 @@ import IconButton from '@mui/material/IconButton';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button } from '@mui/material';
 
-const Navbar: React.FC = () => {
+const Navbar = () => {
     const navigate = useNavigate();
+    const token = localStorage.getItem('token');
 
     const logout = () => {
         localStorage.removeItem('token');
@@ -33,7 +33,7 @@ const Navbar: React.FC = () => {
                     </Box>
                     <Box sx={{ display: 'flex', marginLeft: 4, justifyContent: 'space-between', width: '65%', alignItems: 'center' }}>
                         <Box sx={{ display: 'flex', gap: 2 }}>
-                            {localStorage.getItem('token') ? (
+                            {token ? (
                                 <Button
                                     variant="outlined"
                                     startIcon={<img
@@ -74,7 +74,7 @@ const Navbar: React.FC = () => {
                             )}
                         </Box>
                         <Box sx={{ display: 'flex', gap: 2 }}>
-                            {!localStorage.getItem('token') ? (
+                            {!token ? (
                                 <Button
                                     variant="outlined"
                                     startIcon={<img
