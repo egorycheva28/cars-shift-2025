@@ -94,8 +94,6 @@ const CarRentalPage = () => {
         setStep(step + 1);
     };
 
-    console.log(carRental);
-
     return (
         <div style={{
             display: 'flex',

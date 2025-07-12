@@ -84,7 +84,7 @@ const SecondStepPage: React.FC<StepOneProps> = ({ carRental, handleChange, conti
             <InputForm
                 label="Электронная почта"
                 name="email"
-                type="text"
+                type="email"
                 placeholder="Электронная почта"
                 value={carRental.email || ''}
                 onChange={handleChange}
