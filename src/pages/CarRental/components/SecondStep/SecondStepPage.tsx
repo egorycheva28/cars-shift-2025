@@ -1,19 +1,10 @@
-import CancelButton from "../../components/CancelBurron";
-import InputForm from "../../components/InputForm";
-import SubmitButton from "../../components/SubmitButton";
-import { CarRentalDTO } from "../../types/CarRentalDTO";
+import InputForm from "../../../../components/InputForm";
+import SubmitButton from "../../../../components/SubmitButton";
+import { CarRentalDTO } from "../../../../types/CarRentalDTO";
 import { Checkbox, FormControlLabel } from "@mui/material";
 
 interface StepOneProps {
-    carRental: {
-        firstName: string;
-        lastName: string;
-        middleName: string;
-        birthDate: string;
-        email: string;
-        phone: string;
-        comment: string;
-    };
+    carRental: CarRentalDTO;
     handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     continues: () => void;
     back: () => void;
@@ -103,8 +94,8 @@ const SecondStepPage: React.FC<StepOneProps> = ({ carRental, handleChange, conti
             />
             <FormControlLabel control={<Checkbox />} label="Принимаю условия соглашения" />
             <div style={{ display: 'flex', gap: '24px', padding: '16px 0' }}>
-                <CancelButton text="Назад" width="100%" onClick={back} />
-                <SubmitButton text="Продолжить" width="100%" onClick={continues} />
+                <SubmitButton text="Назад" width="100%" colorScheme="secondary" onClick={back} />
+                <SubmitButton text="Продолжить" width="100%" colorScheme="primary" onClick={continues} />
             </div>
         </div >
     );

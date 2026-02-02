@@ -4,9 +4,9 @@ import { apiAuth } from "../api";
 export const editProfile = async (profileDTO: ProfileDTO): Promise<any> => {
     const body = {
         profile: {
-            firstName: profileDTO.firstName,
-            middleName: profileDTO.middleName,
-            lastName: profileDTO.lastName,
+            firstname: profileDTO.firstname,
+            middlename: profileDTO.middlename,
+            lastname: profileDTO.lastname,
             email: profileDTO.email,
             city: profileDTO.city
         },
@@ -14,16 +14,7 @@ export const editProfile = async (profileDTO: ProfileDTO): Promise<any> => {
     }
 
     try {
-        const response = await apiAuth.patch('/users/profile', {
-            profile: {
-                firstName: profileDTO.firstName,
-                middleName: profileDTO.middleName,
-                lastName: profileDTO.lastName,
-                email: profileDTO.email,
-                city: profileDTO.city
-            },
-            phone: profileDTO.phone
-        });
+        const response = await apiAuth.patch('/users/profile', body);
         return response.data;
     }
     catch (error: any) {

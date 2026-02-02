@@ -2,7 +2,7 @@ import React from "react";
 import { CarDTO } from "../../../types/CarDTO";
 import SubmitButton from "../../../components/SubmitButton";
 import { useNavigate } from "react-router-dom";
-import { translateTransmission } from "../../../components/Consts";
+import { translateTransmission } from "../../../components/Constants";
 
 interface CarCardProps {
     car: CarDTO;
@@ -50,7 +50,7 @@ const CarCard: React.FC<CarCardProps> = ({ loading, car }) => {
                         <h3 style={{ color: '#141C24', margin: '0px' }}>{car.price} &#8381;</h3>
                         <span style={{ fontSize: '16px' }}>{sum} &#8381; за 14 дней</span>
                     </div>
-                    <SubmitButton text="Выбрать" disabled={loading} width="100%" onClick={(e) => { e.stopPropagation(); rent(); }} />
+                    <SubmitButton text="Выбрать" disabled={loading} width="100%" colorScheme="primary" onClick={(e) => { e.stopPropagation(); rent(); }} />
                 </div>
             </div>
         </div>

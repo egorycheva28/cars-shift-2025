@@ -1,24 +1,13 @@
+import SubmitButton from "../../../../components/SubmitButton";
+import { translateStatus } from "../../../../components/Constants";
+import { formatTimestampToDate } from "../../../../components/CommonFunctions";
 import { useLocation, useNavigate } from "react-router-dom";
-import CancelButton from "../../components/CancelBurron";
-import SubmitButton from "../../components/SubmitButton";
-import { translateStatus } from "../../components/Consts";
 
 const CarRentPage = () => {
+
     const location = useLocation();
     const carRental = location.state;
     const navigate = useNavigate();
-
-    const back = () => {
-        navigate('/cars');
-    };
-
-    const formatTimestampToDate = (milliseconds: number) => {
-        const date = new Date(milliseconds);
-        const day = String(date.getDate()).padStart(2, '0');
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const year = date.getFullYear();
-        return `${day}.${month}.${year}`;
-    }
 
     return (
         <div style={{
@@ -57,8 +46,8 @@ const CarRentPage = () => {
                 <span style={{ color: '#97A1AF', fontSize: '14px' }}>Вся информация была продублирована в SMS</span>
             </div>
             <div style={{ display: 'flex', gap: '24px', padding: '16px 0', width: '464px' }}>
-                <CancelButton text="Посмотреть статус" width="100%" />
-                <SubmitButton text="На главную" width="100%" onClick={back} />
+                <SubmitButton text="Посмотреть статус" width="100%" colorScheme="secondary" onClick={() => navigate('/rents')} />
+                <SubmitButton text="На главную" width="100%" colorScheme="primary" onClick={() => navigate('/cars')} />
             </div>
         </div >
     );

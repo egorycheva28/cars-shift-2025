@@ -1,48 +1,54 @@
-import { Button, ButtonProps } from '@mui/material'
+import { Button, ButtonProps } from '@mui/material';
 
-interface SubmitButtonProps extends ButtonProps {
-    text: string
-    disabled?: boolean
-    width?: number | string
-    height?: number | string
+interface CustomButtonProps extends ButtonProps {
+    text: string;
+    disabled?: boolean;
+    width?: number | string;
+    height?: number | string;
+    colorScheme?: 'primary' | 'secondary';
 }
 
-const SubmitButton: React.FC<SubmitButtonProps> = ({
+const SubmitButton: React.FC<CustomButtonProps> = ({
     text,
     disabled = false,
     width = '100%',
     height = '56px',
+    colorScheme = 'primary',
     ...props
-}) => (
-    <Button
-        type="submit"
-        variant="contained"
-        disabled={disabled}
-        sx={{
-            borderRadius: '16px',
-            width,
-            height,
-            fontSize: '16px',
-            textTransform: 'none',
-            bgcolor: '#DB0019',
-            color: '#FFFFFF',
-            '&:hover': {
-                bgcolor: '#DB0019',
-            },
-            '&.Mui-disabled': {
-                bgcolor: '#DB0019',
-                color: '#FFFFFF',
-                opacity: 0.6,
-                cursor: 'not-allowed',
-            },
-            '&.Mui-disabled:hover': {
-                bgcolor: '#DB0019',
-            },
-        }}
-        {...props}
-    >
-        {text}
-    </Button>
-)
+}) => {
+    const styles = {
+        borderRadius: '16px',
+        width,
+        height,
+        fontSize: '16px',
+        textTransform: 'none',
+        bgcolor: colorScheme === 'primary' ? '#DB0019' : '#FFFFFF',
+        color: colorScheme === 'primary' ? '#FFFFFF' : '#344051',
+        '&:hover': {
+            bgcolor: colorScheme === 'primary' ? '#DB0019' : '#FFFFFF',
+        },
+        '&.Mui-disabled': {
+            bgcolor: colorScheme === 'primary' ? '#DB0019' : '#FFFFFF',
+            color: colorScheme === 'primary' ? '#FFFFFF' : '#344051',
+            opacity: 0.6,
+            cursor: 'not-allowed',
+        },
+        '&.Mui-disabled:hover': {
+            bgcolor: colorScheme === 'primary' ? '#DB0019' : '#FFFFFF',
+        },
+    };
+
+    return (
+        <Button
+            type="submit"
+            variant="contained"
+            disabled={disabled}
+            sx={styles}
+            {...props}
+        >
+            {text}
+        </Button>
+    );
+};
 
 export default SubmitButton;

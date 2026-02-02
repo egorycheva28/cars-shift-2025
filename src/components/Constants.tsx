@@ -61,6 +61,6 @@ export const translateColor = {
 }
 
 export const translateStatus: { [key: number]: string } = {
-    0: 'Создано',
-    1: 'Активно'
+    0: 'Создана',
+    1: 'Отменена'
 }

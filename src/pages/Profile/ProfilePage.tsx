@@ -1,74 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { CarRentalDTO } from "../../types/CarRentalDTO";
 import InputForm from "../../components/InputForm";
-import { ProfileDTO } from "../../types/ProfileDTO";
-import CancelButton from "../../components/CancelBurron";
 import SubmitButton from "../../components/SubmitButton";
-import { getProfile } from "../../api/profile/getProfile";
-import { editProfile } from "../../api/profile/editProfile";
+import { useProfilePage } from "./hooks/useProfilePage";
 
 const ProfilePage = () => {
-    const navigate = useNavigate();
 
-    const [errors, setErrors] = useState<Partial<Record<keyof CarRentalDTO, string>>>({});
-    const [loading, setLoading] = useState<boolean>(true);
+    const { state, functions } = useProfilePage();
 
-    const [profile, setProfile] = useState<ProfileDTO>(
-        {
-            phone: '',
-            firstName: '',
-            lastName: '',
-            middleName: '',
-            email: '',
-            city: ''
-        }
-    );
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setProfile(prev => ({ ...prev, [name]: value }));
-    };
-
-    const getSession = async () => {
-        try {
-            const response = await getProfile();
-            setProfile(response.user);
-            setLoading(true);
-        }
-        catch (err: any) {
-            console.error(err);
-            alert('Ошибка получения сессии: ' + (err.message || 'Неизвестная ошибка'));
-        }
-        finally {
-            setLoading(false);
-        }
-    };
-
-    const updateProfile = async () => {
-        try {
-            const response = await editProfile(profile);
-            setLoading(true);
-        }
-        catch (err: any) {
-            console.error(err);
-            alert('Ошибка обновления профиля: ' + (err.message || 'Неизвестная ошибка'));
-        }
-        finally {
-            setLoading(false);
-        }
-    };
-
-    const logout = () => {
-        localStorage.removeItem('token');
-        navigate('/cars');
-    };
-
-    useEffect(() => {
-        getSession();
-    }, []);
-
-    if (loading) {
+    if (state.loading) {
         return <div style={{ position: 'relative', top: 100, display: 'flex', justifyContent: 'center' }}>Загрузка...</div>;
     }
 
@@ -86,11 +24,11 @@ const ProfilePage = () => {
             <div style={{ flex: 1 }}>
                 <InputForm
                     label="Фамилия*"
-                    name="lastName"
+                    name="lastname"
                     type="text"
-                    value={profile.lastName || ''}
+                    value={state.profile.lastname || ''}
                     placeholder="Фамилия"
-                    onChange={handleChange}
+                    onChange={functions.handleChange}
                     helperText={''}
                     width="100%"
                 />
@@ -98,11 +36,11 @@ const ProfilePage = () => {
             <div style={{ flex: 1 }}>
                 <InputForm
                     label="Имя*"
-                    name="firstName"
+                    name="firstname"
                     type="text"
-                    value={profile.firstName || ''}
+                    value={state.profile.firstname || ''}
                     placeholder="Имя"
-                    onChange={handleChange}
+                    onChange={functions.handleChange}
                     helperText={''}
                     width="100%"
                 />
@@ -110,11 +48,11 @@ const ProfilePage = () => {
             <div style={{ flex: 1 }}>
                 <InputForm
                     label="Отчество*"
-                    name="middleName"
+                    name="middlename"
                     type="text"
-                    value={profile.middleName || ''}
+                    value={state.profile.middlename || ''}
                     placeholder="Отчество"
-                    onChange={handleChange}
+                    onChange={functions.handleChange}
                     helperText={''}
                     width="100%"
                 />
@@ -124,10 +62,11 @@ const ProfilePage = () => {
                     label="Телефон*"
                     name="phone"
                     type="text"
-                    value={profile.phone || ''}
+                    value={state.profile.phone || ''}
                     placeholder="Телефон"
-                    onChange={handleChange}
-                    helperText={''}
+                    onChange={functions.handleChange}
+                    error={!!state.errors.phone}
+                    helperText={state.errors.phone}
                     width="100%"
                 />
             </div>
@@ -136,9 +75,9 @@ const ProfilePage = () => {
                     label="Email"
                     name="email"
                     type="email"
-                    value={profile.email || ''}
+                    value={state.profile.email || ''}
                     placeholder="Email"
-                    onChange={handleChange}
+                    onChange={functions.handleChange}
                     helperText={''}
                     width="100%"
                 />
@@ -148,16 +87,16 @@ const ProfilePage = () => {
                     label="Город"
                     name="city"
                     type="text"
-                    value={profile.city || ''}
+                    value={state.profile.city || ''}
                     placeholder="Город"
-                    onChange={handleChange}
+                    onChange={functions.handleChange}
                     helperText={''}
                     width="100%"
                 />
             </div>
             <div style={{ display: 'flex', gap: '24px', padding: '16px 0' }}>
-                <CancelButton text="Выйти" width="70%" onClick={logout} />
-                <SubmitButton text="Обновить данные" width="100%" onClick={updateProfile} />
+                <SubmitButton text="Выйти" width="70%" colorScheme="secondary" onClick={functions.logout} />
+                <SubmitButton text="Обновить данные" width="100%" colorScheme="primary" onClick={functions.updateProfile} />
             </div>
         </div >
     );

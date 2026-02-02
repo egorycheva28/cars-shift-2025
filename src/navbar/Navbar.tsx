@@ -18,7 +18,7 @@ const Navbar = () => {
         <AppBar sx={{ position: 'fixed', height: '82px', paddingTop: '8px', top: 0, width: '100%', zIndex: 1000, backgroundColor: '#FFFFFF', borderBottom: '1px solid #CED2DA', boxShadow: 'none' }}>
             <Toolbar disableGutters>
                 <Box sx={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <Box sx={{ display: 'flex', alignItems: 'center', flexShrink: 0 }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', flexShrink: 0, cursor: 'pointer' }} onClick={() => navigate('/cars')}>
                         <Typography variant="h6" component="div" sx={{ color: '#DB0019', width: '40%', fontSize: '13.43px', fontWeight: 600 }}>
                             ШИФТ RENT
                         </Typography>
@@ -34,41 +34,39 @@ const Navbar = () => {
                     <Box sx={{ display: 'flex', marginLeft: 4, justifyContent: 'space-between', width: '65%', alignItems: 'center' }}>
                         <Box sx={{ display: 'flex', gap: 2 }}>
                             {token ? (
-                                <Button
-                                    variant="outlined"
-                                    startIcon={<img
-                                        src="../../profileBlack.png"
-                                        alt="Профиль"
-                                        style={{
-                                            width: 16,
-                                            height: 16,
-                                            objectFit: 'contain'
-                                        }}
-                                    />}
-                                    sx={{ color: '#141C24', border: "none", /*fontFamily: 'Inter',*/ fontWeight: 500, fontSize: '16px', display: 'flex', alignItems: 'center', gap: 0.3, textTransform: 'none' }}
-                                    onClick={() => navigate('/profile')}
-                                >
-                                    Профиль
-                                </Button>
-                            ) : (
-                                <></>
-                            )}
-                            {localStorage.getItem('token') ? (
-                                <Button
-                                    variant="outlined"
-                                    startIcon={<img
-                                        src="../../rentBlack.png"
-                                        alt="Заказы"
-                                        style={{
-                                            width: 16,
-                                            height: 16,
-                                            objectFit: 'contain'
-                                        }}
-                                    />} sx={{ color: '#141C24', border: "none", fontWeight: 500, fontSize: '16px', display: 'flex', alignItems: 'center', gap: 0.3, textTransform: 'none' }}
-                                    onClick={() => navigate('/rent')}
-                                >
-                                    Заказы
-                                </Button>
+                                <>
+                                    <Button
+                                        variant="outlined"
+                                        startIcon={<img
+                                            src="../../profileBlack.png"
+                                            alt="Профиль"
+                                            style={{
+                                                width: 16,
+                                                height: 16,
+                                                objectFit: 'contain'
+                                            }}
+                                        />}
+                                        sx={{ color: '#141C24', border: "none", fontWeight: 500, fontSize: '16px', display: 'flex', alignItems: 'center', gap: 0.3, textTransform: 'none' }}
+                                        onClick={() => navigate('/profile')}
+                                    >
+                                        Профиль
+                                    </Button>
+                                    <Button
+                                        variant="outlined"
+                                        startIcon={<img
+                                            src="../../rentBlack.png"
+                                            alt="Заказы"
+                                            style={{
+                                                width: 16,
+                                                height: 16,
+                                                objectFit: 'contain'
+                                            }}
+                                        />} sx={{ color: '#141C24', border: "none", fontWeight: 500, fontSize: '16px', display: 'flex', alignItems: 'center', gap: 0.3, textTransform: 'none' }}
+                                        onClick={() => navigate('/rents')}
+                                    >
+                                        Заказы
+                                    </Button>
+                                </>
                             ) : (
                                 <></>
                             )}
@@ -110,7 +108,7 @@ const Navbar = () => {
                             <IconButton>
                                 <img
                                     src="../../moon.png"
-                                    alt="Выйти"
+                                    alt="moon"
                                     style={{
                                         width: 16,
                                         height: 16,

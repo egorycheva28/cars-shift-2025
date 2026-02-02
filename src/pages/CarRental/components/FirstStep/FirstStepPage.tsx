@@ -1,11 +1,9 @@
-import { useNavigate } from "react-router-dom";
-import CancelButton from "../../components/CancelBurron";
-import InputForm from "../../components/InputForm";
-import SubmitButton from "../../components/SubmitButton";
-import { CarRentalDTO } from "../../types/CarRentalDTO";
-import { useState } from "react";
+import InputForm from "../../../../components/InputForm";
+import SubmitButton from "../../../../components/SubmitButton";
+import { CarRentalDTO } from "../../../../types/CarRentalDTO";
 import { LocalizationProvider, DateRangePicker } from '@mui/x-date-pickers-pro';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { useFirstStepPage } from "./hooks/useFirstStepPage";
 
 interface StepOneProps {
     carRental: {
@@ -21,26 +19,8 @@ interface StepOneProps {
 }
 
 const FirstStepPage: React.FC<StepOneProps> = ({ carRental, handleChange, continues, errors, handleDateChange }) => {
-    const navigate = useNavigate();
 
-    const back = () => {
-        navigate('/cars');
-    };
-
-    const [value, setValue] = useState<[Date | null, Date | null]>([
-        carRental.startDate ? new Date(carRental.startDate) : null,
-        carRental.endDate ? new Date(carRental.endDate) : null,
-    ]);
-
-    const handleChange1 = (newValue: [Date | null, Date | null]) => {
-        setValue(newValue);
-        if (newValue[0]) {
-            handleDateChange('startDate', newValue[0].getTime());
-        }
-        if (newValue[1]) {
-            handleDateChange('endDate', newValue[1].getTime());
-        }
-    };
+    const { state, functions } = useFirstStepPage({ carRental, handleDateChange });
 
     return (
         <div style={{
@@ -53,8 +33,8 @@ const FirstStepPage: React.FC<StepOneProps> = ({ carRental, handleChange, contin
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                     <label>Даты аренды</label>
                     <DateRangePicker
-                        value={value}
-                        onChange={handleChange1}
+                        value={state.value}
+                        onChange={functions.handleChange}
                     />
                 </div>
             </LocalizationProvider>
@@ -81,8 +61,8 @@ const FirstStepPage: React.FC<StepOneProps> = ({ carRental, handleChange, contin
                 width="100%"
             />
             <div style={{ display: 'flex', gap: '24px', padding: '16px 0' }}>
-                <CancelButton text="Назад" width="100%" onClick={back} />
-                <SubmitButton text="Продолжить" width="100%" onClick={continues} />
+                <SubmitButton text="Назад" width="100%" colorScheme="secondary" onClick={functions.back} />
+                <SubmitButton text="Продолжить" width="100%" colorScheme="primary" onClick={continues} />
             </div>
         </div >
     );

@@ -1,8 +1,8 @@
 export interface ProfileDTO {
     phone: string;
-    lastName?: string;
-    firstName?: string;
-    middleName?: string;
+    lastname?: string;
+    firstname?: string;
+    middlename?: string;
     email?: string;
     city?: string;
 }
