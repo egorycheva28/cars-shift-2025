@@ -6,9 +6,10 @@ interface CancelRentDialogProps {
     isOpen: boolean;
     handleIsOpenModal: (isOpen: boolean) => void;
     cancelRents: () => void;
+    isDark: boolean;
 }
 
-export const CancelRentDialog: React.FC<CancelRentDialogProps> = ({ isOpen, handleIsOpenModal, cancelRents }) => {
+export const CancelRentDialog: React.FC<CancelRentDialogProps> = ({ isOpen, handleIsOpenModal, cancelRents, isDark }) => {
 
     return (
         <Dialog
@@ -22,7 +23,8 @@ export const CancelRentDialog: React.FC<CancelRentDialogProps> = ({ isOpen, hand
                     width: '328px',
                     height: 'auto',
                     padding: '72px 108px',
-                    gap: '40px'
+                    gap: '40px',
+                    background: isDark ? '#141C24' : '#FFFFFF'
                 },
             }
             }
@@ -34,7 +36,7 @@ export const CancelRentDialog: React.FC<CancelRentDialogProps> = ({ isOpen, hand
                     position: 'absolute',
                     top: 8,
                     right: 8,
-                    backgroundColor: 'white',
+                    backgroundColor: isDark ? '#141C24' : '#FFFFFF',
                     zIndex: 1,
                 }}
             >
@@ -44,11 +46,11 @@ export const CancelRentDialog: React.FC<CancelRentDialogProps> = ({ isOpen, hand
                 <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: 'linear-gradient(180deg, #FF9D9F 0%, #E63033 100%)' }}>
                     <span style={{ color: 'white', position: 'relative', top: '5px', left: '20px', fontSize: '34px' }}>?</span>
                 </div>
-                <h3 style={{ color: '#141C24' }}>Отменить бронь?</h3>
+                <h3 style={{ color: isDark ? '#FFFFFF' : '#141C24' }}>Отменить бронь?</h3>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                <SubmitButton text="Отменить" colorScheme="secondary" onClick={() => cancelRents()} />
-                <SubmitButton text="Не отменять" colorScheme="primary" onClick={() => handleIsOpenModal(false)} />
+                <SubmitButton text="Отменить" colorScheme="secondary" isDark={isDark} onClick={() => cancelRents()} />
+                <SubmitButton text="Не отменять" colorScheme="primary" isDark={isDark} onClick={() => handleIsOpenModal(false)} />
             </div>
         </Dialog>
     );

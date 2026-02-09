@@ -7,9 +7,10 @@ import { translateTransmission } from "../../../components/Constants";
 interface CarCardProps {
     car: CarDTO;
     loading: boolean;
+    isDark: boolean;
 }
 
-const CarCard: React.FC<CarCardProps> = ({ loading, car }) => {
+const CarCard: React.FC<CarCardProps> = ({ loading, car, isDark }) => {
 
     const navigate = useNavigate();
 
@@ -42,15 +43,15 @@ const CarCard: React.FC<CarCardProps> = ({ loading, car }) => {
             </div>
             <div style={{ display: 'flex', gap: '32px', flexDirection: 'column' }}>
                 <div style={{ display: 'flex', gap: '8px', flexDirection: 'column' }}>
-                    <h3 style={{ margin: '0px' }}>{car.name}</h3>
-                    <span style={{ fontSize: '16px' }}>{translateTransmission[car.transmission]}</span>
+                    <h3 style={{ margin: '0px', color: !isDark ? '#141C24' : '#FFFFFF' }}>{car.name}</h3>
+                    <span style={{ fontSize: '16px', color: !isDark ? '#141C24' : '#FFFFFF' }}>{translateTransmission[car.transmission]}</span>
                 </div>
                 <div style={{ display: 'flex', gap: '24px', flexDirection: 'column' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <h3 style={{ color: '#141C24', margin: '0px' }}>{car.price} &#8381;</h3>
-                        <span style={{ fontSize: '16px' }}>{sum} &#8381; за 14 дней</span>
+                        <h3 style={{ color: !isDark ? '#141C24' : '#FFFFFF', margin: '0px' }}>{car.price} &#8381;</h3>
+                        <span style={{ fontSize: '16px', color: !isDark ? '#141C24' : '#FFFFFF' }}>{sum} &#8381; за 14 дней</span>
                     </div>
-                    <SubmitButton text="Выбрать" disabled={loading} width="100%" colorScheme="primary" onClick={(e) => { e.stopPropagation(); rent(); }} />
+                    <SubmitButton text="Выбрать" disabled={loading} width="100%" colorScheme="primary" isDark={isDark} onClick={(e) => { e.stopPropagation(); rent(); }} />
                 </div>
             </div>
         </div>

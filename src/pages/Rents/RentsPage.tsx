@@ -1,7 +1,7 @@
 import RentCard from "./components/RentCard";
 import { useRentsPage } from "./hooks/useRentsPage";
 
-const RentsPage = () => {
+const RentsPage = ({ isDark }: { isDark: boolean }) => {
 
     const { state } = useRentsPage();
 
@@ -18,7 +18,7 @@ const RentsPage = () => {
             position: 'relative',
             top: 125
         }}>
-            <h2 style={{ margin: 0, color: '#141C24' }}>Заказы</h2>
+            <h2 style={{ margin: 0, color: isDark ? '#FFFFFF' : '#141C24' }}>Заказы</h2>
             <div style={{ display: 'flex', gap: '24px' }}>
                 <span style={{ color: '#637083', fontSize: '14px', width: '150px' }}>Автомобиль</span>
                 <span style={{ color: '#637083', fontSize: '14px', width: '428px' }}>Даты брони</span>
@@ -27,7 +27,7 @@ const RentsPage = () => {
             <div style={{ display: 'flex', flexWrap: 'wrap', width: '100%' }}>
                 {state.rents.map(rent => (
                     <div>
-                        <RentCard key={rent._id} rent={rent} />
+                        <RentCard key={rent._id} rent={rent} isDark={isDark} />
                     </div>
                 ))}
             </div>

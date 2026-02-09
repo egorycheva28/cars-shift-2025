@@ -2,7 +2,7 @@ import InputForm from "../../components/InputForm";
 import SubmitButton from "../../components/SubmitButton";
 import { useProfilePage } from "./hooks/useProfilePage";
 
-const ProfilePage = () => {
+const ProfilePage = ({ isDark }: { isDark: boolean }) => {
 
     const { state, functions } = useProfilePage();
 
@@ -20,7 +20,7 @@ const ProfilePage = () => {
             top: 125,
             width: '368px'
         }}>
-            <h2 style={{ margin: 0, color: '#141C24' }}>Профиль</h2>
+            <h2 style={{ margin: 0, color: isDark ? '#FFFFFF' : '#141C24' }}>Профиль</h2>
             <div style={{ flex: 1 }}>
                 <InputForm
                     label="Фамилия*"
@@ -31,6 +31,7 @@ const ProfilePage = () => {
                     onChange={functions.handleChange}
                     helperText={''}
                     width="100%"
+                    isDark={isDark}
                 />
             </div>
             <div style={{ flex: 1 }}>
@@ -43,6 +44,7 @@ const ProfilePage = () => {
                     onChange={functions.handleChange}
                     helperText={''}
                     width="100%"
+                    isDark={isDark}
                 />
             </div>
             <div style={{ flex: 1 }}>
@@ -55,6 +57,7 @@ const ProfilePage = () => {
                     onChange={functions.handleChange}
                     helperText={''}
                     width="100%"
+                    isDark={isDark}
                 />
             </div>
             <div style={{ flex: 1 }}>
@@ -68,6 +71,7 @@ const ProfilePage = () => {
                     error={!!state.errors.phone}
                     helperText={state.errors.phone}
                     width="100%"
+                    isDark={isDark}
                 />
             </div>
             <div style={{ flex: 1 }}>
@@ -80,6 +84,7 @@ const ProfilePage = () => {
                     onChange={functions.handleChange}
                     helperText={''}
                     width="100%"
+                    isDark={isDark}
                 />
             </div>
             <div style={{ flex: 1 }}>
@@ -92,11 +97,12 @@ const ProfilePage = () => {
                     onChange={functions.handleChange}
                     helperText={''}
                     width="100%"
+                    isDark={isDark}
                 />
             </div>
             <div style={{ display: 'flex', gap: '24px', padding: '16px 0' }}>
-                <SubmitButton text="Выйти" width="70%" colorScheme="secondary" onClick={functions.logout} />
-                <SubmitButton text="Обновить данные" width="100%" colorScheme="primary" onClick={functions.updateProfile} />
+                <SubmitButton text="Выйти" width="70%" colorScheme="secondary" isDark={isDark} onClick={functions.logout} />
+                <SubmitButton text="Обновить данные" width="100%" colorScheme="primary" isDark={isDark} onClick={functions.updateProfile} />
             </div>
         </div >
     );

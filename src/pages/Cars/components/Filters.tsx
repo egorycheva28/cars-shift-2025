@@ -12,12 +12,13 @@ interface FiltersProps {
     chooseColor: (newValue: any) => void;
     cancelFilters: () => void;
     applyFilters: () => void;
+    isDark: boolean;
 }
 
-const Filters: React.FC<FiltersProps> = ({ filters, loading, handleChange, chooseTransmission, chooseColor, cancelFilters, applyFilters }) => {
+const Filters: React.FC<FiltersProps> = ({ filters, loading, handleChange, chooseTransmission, chooseColor, cancelFilters, applyFilters, isDark }) => {
     return (
         <div style={{
-            backgroundColor: '#FFFFFF', borderRadius: '16px', border: '1px solid #CED2DA', padding: '32px', display: 'flex',
+            backgroundColor: isDark ? '#141C24' : '#FFFFFF', borderRadius: '16px', border: '1px solid #CED2DA', padding: '32px', display: 'flex',
             gap: '24px', flexDirection: 'column'
         }}>
             <div style={{ display: 'flex', flexDirection: 'row', gap: '24px' }}>
@@ -32,6 +33,7 @@ const Filters: React.FC<FiltersProps> = ({ filters, loading, handleChange, choos
                         options={brandOptions}
                         helperText={''}
                         width="100%"
+                        isDark={isDark}
                     />
                 </div>
                 <div style={{ flex: 1 }}>
@@ -45,35 +47,36 @@ const Filters: React.FC<FiltersProps> = ({ filters, loading, handleChange, choos
                         options={bodyTypeOptions}
                         helperText={''}
                         width="100%"
+                        isDark={isDark}
                     />
                 </div>
             </div>
             <div style={{ display: 'flex', flexDirection: 'row', gap: '24px' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', flex: 1 }}>
-                    <label style={{ color: '#141C24', fontSize: '16px' }}>Руль</label>
-                    <Tabs value={filters.transmission} centered style={{ borderRadius: '16px', backgroundColor: ' #F3F4F6', padding: '2px' }}>
-                        <Tab label="Любой" style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', width: '33%' }} />
+                    <label style={{ color: isDark ? '#FFFFFF' : '#141C24', fontSize: '16px' }}>Руль</label>
+                    <Tabs value={filters.transmission} centered style={{ borderRadius: '16px', backgroundColor: isDark ? '#344051' : '#F3F4F6', padding: '2px' }}>
+                        <Tab label="Любой" style={{ backgroundColor: isDark ? '#141C24' : '#FFFFFF', borderRadius: '16px', width: '33%' }} />
                         <Tab label="Левый" style={{ width: '33%' }} />
                         <Tab label="Правый" style={{ width: '34%' }} />
                     </Tabs>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', flex: 1 }}>
-                    <label style={{ color: '#141C24', fontSize: '16px' }}>Коробка передач</label>
-                    <Tabs value={filters.transmission} centered style={{ borderRadius: '16px', backgroundColor: ' #F3F4F6', padding: '2px' }}>
-                        <Tab label="Любой" style={{ backgroundColor: filters.transmission === '' ? '#FFFFFF' : '#F3F4F6', borderRadius: '16px', width: '33%' }} onClick={() => chooseTransmission('')} />
-                        <Tab label="Автомат" style={{ backgroundColor: filters.transmission === 'automatic' ? '#FFFFFF' : '#F3F4F6', borderRadius: '16px', width: '33%' }} onClick={() => chooseTransmission('automatic')} />
-                        <Tab label="Механика" style={{ backgroundColor: filters.transmission === 'manual' ? '#FFFFFF' : '#F3F4F6', borderRadius: '16px', width: '34%' }} onClick={() => chooseTransmission('manual')} />
+                    <label style={{ color: isDark ? '#FFFFFF' : '#141C24', fontSize: '16px' }}>Коробка передач</label>
+                    <Tabs value={filters.transmission} centered style={{ borderRadius: '16px', backgroundColor: isDark ? '#344051' : '#F3F4F6', padding: '2px' }}>
+                        <Tab label="Любой" style={{ backgroundColor: filters.transmission === '' ? (isDark ? '#141C24' : '#FFFFFF') : (isDark ? '#344051' : '#F3F4F6'), borderRadius: '16px', width: '33%' }} onClick={() => chooseTransmission('')} />
+                        <Tab label="Автомат" style={{ backgroundColor: filters.transmission === 'automatic' ? (isDark ? '#141C24' : '#FFFFFF') : (isDark ? '#344051' : '#F3F4F6'), borderRadius: '16px', width: '33%' }} onClick={() => chooseTransmission('automatic')} />
+                        <Tab label="Механика" style={{ backgroundColor: filters.transmission === 'manual' ? (isDark ? '#141C24' : '#FFFFFF') : (isDark ? '#344051' : '#F3F4F6'), borderRadius: '16px', width: '34%' }} onClick={() => chooseTransmission('manual')} />
                     </Tabs>
                 </div>
             </div>
             <div style={{ display: 'flex', flexDirection: 'row', gap: '24px' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', flex: 1 }}>
-                    <label style={{ color: '#141C24', fontSize: '16px' }}>Стоимость</label>
+                    <label style={{ color: isDark ? '#FFFFFF' : '#141C24', fontSize: '16px' }}>Стоимость</label>
 
                     <Slider disabled defaultValue={30} aria-label="Disabled slider" style={{ cursor: 'pointer' }} />
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', flex: 1 }}>
-                    <label style={{ color: '#141C24', fontSize: '16px' }}>Цвет</label>
+                    <label style={{ color: isDark ? '#FFFFFF' : '#141C24', fontSize: '16px' }}>Цвет</label>
                     <div
                         style={{
                             display: 'flex',
@@ -113,8 +116,8 @@ const Filters: React.FC<FiltersProps> = ({ filters, loading, handleChange, choos
                 </div>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <SubmitButton text="Сбросить все фильтры" colorScheme="secondary" onClick={cancelFilters} disabled={loading} width="35%" />
-                <SubmitButton text="Показать" colorScheme="primary" onClick={applyFilters} disabled={loading} width="35%" />
+                <SubmitButton text="Сбросить все фильтры" colorScheme="secondary" isDark={isDark} onClick={cancelFilters} disabled={loading} width="35%" />
+                <SubmitButton text="Показать" colorScheme="primary" isDark={isDark} onClick={applyFilters} disabled={loading} width="35%" />
             </div>
         </div>
     );

@@ -9,9 +9,10 @@ interface StepOneProps {
     continues: () => void;
     back: () => void;
     errors: (Partial<Record<keyof CarRentalDTO, string>>);
+    isDark: boolean;
 }
 
-const SecondStepPage: React.FC<StepOneProps> = ({ carRental, handleChange, continues, back, errors }) => {
+const SecondStepPage: React.FC<StepOneProps> = ({ carRental, handleChange, continues, back, errors, isDark }) => {
     return (
         <div style={{
             display: 'flex',
@@ -29,6 +30,7 @@ const SecondStepPage: React.FC<StepOneProps> = ({ carRental, handleChange, conti
                 error={!!errors.lastName}
                 helperText={errors.lastName}
                 width="100%"
+                isDark={isDark}
             />
             <InputForm
                 label="Имя"
@@ -40,6 +42,7 @@ const SecondStepPage: React.FC<StepOneProps> = ({ carRental, handleChange, conti
                 error={!!errors.firstName}
                 helperText={errors.firstName}
                 width="100%"
+                isDark={isDark}
             />
             <InputForm
                 label="Отчество"
@@ -49,6 +52,7 @@ const SecondStepPage: React.FC<StepOneProps> = ({ carRental, handleChange, conti
                 value={carRental.middleName || ''}
                 onChange={handleChange}
                 width="100%"
+                isDark={isDark}
             />
             <InputForm
                 label="Дата рождения"
@@ -60,6 +64,7 @@ const SecondStepPage: React.FC<StepOneProps> = ({ carRental, handleChange, conti
                 error={!!errors.birthDate}
                 helperText={errors.birthDate}
                 width="100%"
+                isDark={isDark}
             />
             <InputForm
                 label="Номер телефона"
@@ -71,6 +76,7 @@ const SecondStepPage: React.FC<StepOneProps> = ({ carRental, handleChange, conti
                 error={!!errors.phone}
                 helperText={errors.phone}
                 width="100%"
+                isDark={isDark}
             />
             <InputForm
                 label="Электронная почта"
@@ -82,6 +88,7 @@ const SecondStepPage: React.FC<StepOneProps> = ({ carRental, handleChange, conti
                 error={!!errors.email}
                 helperText={errors.email}
                 width="100%"
+                isDark={isDark}
             />
             <InputForm
                 label="Комментарий"
@@ -91,11 +98,12 @@ const SecondStepPage: React.FC<StepOneProps> = ({ carRental, handleChange, conti
                 value={carRental.comment || ''}
                 onChange={handleChange}
                 width="100%"
+                isDark={isDark}
             />
-            <FormControlLabel control={<Checkbox />} label="Принимаю условия соглашения" />
+            <FormControlLabel style={{ color: isDark ? '#FFFFFF' : '#141C24' }} control={<Checkbox />} label="Принимаю условия соглашения" />
             <div style={{ display: 'flex', gap: '24px', padding: '16px 0' }}>
-                <SubmitButton text="Назад" width="100%" colorScheme="secondary" onClick={back} />
-                <SubmitButton text="Продолжить" width="100%" colorScheme="primary" onClick={continues} />
+                <SubmitButton text="Назад" width="100%" colorScheme="secondary" isDark={isDark} onClick={back} />
+                <SubmitButton text="Продолжить" width="100%" colorScheme="primary" isDark={isDark} onClick={continues} />
             </div>
         </div >
     );

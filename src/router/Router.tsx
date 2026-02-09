@@ -9,21 +9,21 @@ import ProfilePage from '../pages/Profile/ProfilePage';
 import RentsPage from '../pages/Rents/RentsPage';
 import RentDetailPage from '../pages/RentDetail/RentDetailPage';
 
-const Router = () => {
+const Router = ({ toggleTheme, isDark }: { toggleTheme: () => void, isDark: boolean }) => {
 
     return (
         <>
-            <Navbar />
+            <Navbar onToggleTheme={toggleTheme} isDark={isDark} />
             <Routes>
-                <Route path="/" element={<CarsPage />} />
-                <Route path="/cars" element={<CarsPage />} />
-                <Route path="/car/:id" element={<CarDetailPage />} />
-                <Route path="/car/rent/:id" element={<CarRentalPage />} />
-                <Route path="/car/rent" element={<CarRentPage />} />
-                <Route path="/login" element={<AuthPage />} />
-                <Route path="/profile" element={<ProfilePage />} />
-                <Route path="/rents" element={<RentsPage />} />
-                <Route path="/rent/:id" element={<RentDetailPage />} />
+                <Route path="/" element={<CarsPage isDark={isDark} />} />
+                <Route path="/cars" element={<CarsPage isDark={isDark} />} />
+                <Route path="/car/:id" element={<CarDetailPage isDark={isDark} />} />
+                <Route path="/car/rent/:id" element={<CarRentalPage isDark={isDark} />} />
+                <Route path="/car/rent" element={<CarRentPage isDark={isDark} />} />
+                <Route path="/login" element={<AuthPage isDark={isDark} />} />
+                <Route path="/profile" element={<ProfilePage isDark={isDark} />} />
+                <Route path="/rents" element={<RentsPage isDark={isDark} />} />
+                <Route path="/rent/:id" element={<RentDetailPage isDark={isDark} />} />
             </Routes>
         </>
     );

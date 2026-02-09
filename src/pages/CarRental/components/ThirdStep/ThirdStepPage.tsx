@@ -9,9 +9,10 @@ interface StepOneProps {
     continues: () => void;
     back: () => void;
     setStep: (step: number) => void;
+    isDark: boolean;
 }
 
-const ThirdStepPage: React.FC<StepOneProps> = ({ carRental, back, setStep }) => {
+const ThirdStepPage: React.FC<StepOneProps> = ({ carRental, back, setStep, isDark }) => {
 
     const { state, functions } = useThirdStepPage({ carRental, setStep });
 
@@ -32,30 +33,30 @@ const ThirdStepPage: React.FC<StepOneProps> = ({ carRental, back, setStep }) => 
                 display: 'flex',
                 gap: '24px',
                 borderRadius: '16px',
-                backgroundColor: '#F3F4F6',
+                backgroundColor: isDark ? '#344051' : '#F3F4F6',
                 flexDirection: 'row'
             }}>
                 <div style={{ padding: '8px 0', display: 'flex', gap: '16px', width: '100%' }}>
-                    <span style={{ fontSize: '16px', color: '#141C24' }}>Данные брони</span>
+                    <span style={{ fontSize: '16px', color: isDark ? '#FFFFFF' : '#141C24' }}>Данные брони</span>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', width: '100%' }}>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
                         <span style={{ color: '#637083', fontSize: '12px' }}>Автомобиль</span>
-                        <span style={{ fontSize: '16px', color: '#141C24' }}>{state.car?.name}</span>
+                        <span style={{ fontSize: '16px', color: isDark ? '#FFFFFF' : '#141C24' }}>{state.car?.name}</span>
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
                         <span style={{ color: '#637083', fontSize: '12px' }}>Даты брони</span>
-                        <span style={{ fontSize: '16px', color: '#141C24' }}>{formatTimestampToDate(carRental.startDate || 0)} - {formatTimestampToDate(carRental.endDate || 0)}</span>
+                        <span style={{ fontSize: '16px', color: isDark ? '#FFFFFF' : '#141C24' }}>{formatTimestampToDate(carRental.startDate || 0)} - {formatTimestampToDate(carRental.endDate || 0)}</span>
                     </div>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', width: '100%' }}>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
                         <span style={{ color: '#637083', fontSize: '12px' }}>Место получения</span>
-                        <span style={{ fontSize: '16px', color: '#141C24' }}>{carRental.pickupLocation}</span>
+                        <span style={{ fontSize: '16px', color: isDark ? '#FFFFFF' : '#141C24' }}>{carRental.pickupLocation}</span>
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
                         <span style={{ color: '#637083', fontSize: '12px' }}>Место возврата</span>
-                        <span style={{ fontSize: '16px', color: '#141C24' }}>{carRental.returnLocation}</span>
+                        <span style={{ fontSize: '16px', color: isDark ? '#FFFFFF' : '#141C24' }}>{carRental.returnLocation}</span>
                     </div>
                 </div>
                 <div>
@@ -68,34 +69,34 @@ const ThirdStepPage: React.FC<StepOneProps> = ({ carRental, back, setStep }) => 
                 display: 'flex',
                 gap: '24px',
                 borderRadius: '16px',
-                backgroundColor: '#F3F4F6',
+                backgroundColor: isDark ? '#344051' : '#F3F4F6',
                 flexDirection: 'row'
             }}>
                 <div style={{ padding: '8px 0', display: 'flex', gap: '16px', width: '100%' }}>
-                    <span style={{ fontSize: '16px', color: '#141C24' }}>Данные заказчика</span>
+                    <span style={{ fontSize: '16px', color: isDark ? '#FFFFFF' : '#141C24' }}>Данные заказчика</span>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', width: '100%' }}>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
                         <span style={{ color: '#637083', fontSize: '12px' }}>ФИО</span>
-                        <span style={{ fontSize: '16px', color: '#141C24' }}>{carRental.lastName} {carRental.firstName} {carRental.middleName}</span>
+                        <span style={{ fontSize: '16px', color: isDark ? '#FFFFFF' : '#141C24' }}>{carRental.lastName} {carRental.firstName} {carRental.middleName}</span>
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
                         <span style={{ color: '#637083', fontSize: '12px' }}>Дата рождения</span>
-                        <span style={{ fontSize: '16px', color: '#141C24' }}>{formatDate(carRental.birthDate)}</span>
+                        <span style={{ fontSize: '16px', color: isDark ? '#FFFFFF' : '#141C24' }}>{formatDate(carRental.birthDate)}</span>
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
                         <span style={{ color: '#637083', fontSize: '12px' }}>Номер телефона</span>
-                        <span style={{ fontSize: '16px', color: '#141C24' }}>{carRental.phone}</span>
+                        <span style={{ fontSize: '16px', color: isDark ? '#FFFFFF' : '#141C24' }}>{carRental.phone}</span>
                     </div>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', width: '100%' }}>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
                         <span style={{ color: '#637083', fontSize: '12px' }}>Электронная почта</span>
-                        <span style={{ fontSize: '16px', color: '#141C24' }}>{carRental.email}</span>
+                        <span style={{ fontSize: '16px', color: isDark ? '#FFFFFF' : '#141C24' }}>{carRental.email}</span>
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
                         <span style={{ color: '#637083', fontSize: '12px' }}>Комментарий</span>
-                        <span style={{ fontSize: '16px', color: '#141C24' }}>{carRental.comment || 'Нет данных'}</span>
+                        <span style={{ fontSize: '16px', color: isDark ? '#FFFFFF' : '#141C24' }}>{carRental.comment || 'Нет данных'}</span>
                     </div>
                 </div>
                 <div>
@@ -104,16 +105,16 @@ const ThirdStepPage: React.FC<StepOneProps> = ({ carRental, back, setStep }) => 
             </div>
             <div style={{ padding: '12px 0', display: 'flex', gap: '16px', flexDirection: 'column' }}>
                 <div style={{ display: 'flex', gap: '16px', justifyContent: 'flex-end' }}>
-                    <h3 style={{ margin: 0 }}>Итого:</h3>
-                    <h3 style={{ margin: 0 }}>{(state.car?.price || 0) * functions.daysCount()} &#8381;</h3>
+                    <h3 style={{ margin: 0, color: isDark ? '#FFFFFF' : '#141C24' }}>Итого:</h3>
+                    <h3 style={{ margin: 0, color: isDark ? '#FFFFFF' : '#141C24' }}>{(state.car?.price || 0) * functions.daysCount()} &#8381;</h3>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                    <span>Аренда: {functions.displayValue()}</span>
+                    <span style={{ color: isDark ? '#FFFFFF' : '#141C24' }}>Аренда: {functions.displayValue()}</span>
                 </div>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', padding: '16px 0' }}>
-                <SubmitButton text="Назад" width="33%" colorScheme="secondary" onClick={back} />
-                <SubmitButton text="Забронировать" width="33%" colorScheme="primary" onClick={functions.rent} />
+                <SubmitButton text="Назад" width="33%" colorScheme="secondary" isDark={isDark} onClick={back} />
+                <SubmitButton text="Забронировать" width="33%" colorScheme="primary" isDark={isDark} onClick={functions.rent} />
             </div>
         </div >
     );

@@ -2,7 +2,7 @@ import SubmitButton from "../../components/SubmitButton";
 import { translateBodyType, translateColor, translateSteering, translateTransmission } from "../../components/Constants";
 import { useCarDetailPage } from "./hooks/useCarDetailPage";
 
-const CarDetailPage = () => {
+const CarDetailPage = ({ isDark }: { isDark: boolean }) => {
 
     const { state, functions } = useCarDetailPage();
 
@@ -51,47 +51,47 @@ const CarDetailPage = () => {
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', width: '100%', gap: '32px' }}>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-                        <h1 style={{ color: '#141C24' }}>{state.car?.name}</h1>
+                        <h1 style={{ color: isDark ? '#FFFFFF' : '#141C24' }}>{state.car?.name}</h1>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-                            <h2 style={{ color: '#141C24', margin: 0 }}>Характеристики</h2>
+                            <h2 style={{ color: isDark ? '#FFFFFF' : '#141C24', margin: 0 }}>Характеристики</h2>
                             <div style={{ border: '1px solid #E3E5E5' }}></div>
                             <div style={{ display: 'flex', flexDirection: 'row', gap: '24px', height: 'auto', width: '100%' }}>
-                                <span style={{ color: '#141C24', fontSize: '16px', width: '50%' }}>Коробка передач</span>
-                                <span style={{ color: '#141C24', fontSize: '16px', width: '50%' }}>{translateTransmission[state.car.transmission]}</span>
+                                <span style={{ color: isDark ? '#FFFFFF' : '#141C24', fontSize: '16px', width: '50%' }}>Коробка передач</span>
+                                <span style={{ color: isDark ? '#FFFFFF' : '#141C24', fontSize: '16px', width: '50%' }}>{translateTransmission[state.car.transmission]}</span>
                             </div>
                             <div style={{ border: '1px solid #E3E5E5' }}></div>
                             <div style={{ display: 'flex', flexDirection: 'row', gap: '24px', height: 'auto', width: '100%' }}>
-                                <span style={{ color: '#141C24', fontSize: '16px', width: '50%' }}>Руль</span>
-                                <span style={{ color: '#141C24', fontSize: '16px', width: '50%' }}>{translateSteering[state.car.steering]}</span>
+                                <span style={{ color: isDark ? '#FFFFFF' : '#141C24', fontSize: '16px', width: '50%' }}>Руль</span>
+                                <span style={{ color: isDark ? '#FFFFFF' : '#141C24', fontSize: '16px', width: '50%' }}>{translateSteering[state.car.steering]}</span>
                             </div>
                             <div style={{ border: '1px solid #E3E5E5' }}></div>
                             <div style={{ display: 'flex', flexDirection: 'row', gap: '24px', height: 'auto', width: '100%' }}>
-                                <span style={{ color: '#141C24', fontSize: '16px', width: '50%' }}>Тип кузова</span>
-                                <span style={{ color: '#141C24', fontSize: '16px', width: '50%' }}>{translateBodyType[state.car.bodyType]}</span>
+                                <span style={{ color: isDark ? '#FFFFFF' : '#141C24', fontSize: '16px', width: '50%' }}>Тип кузова</span>
+                                <span style={{ color: isDark ? '#FFFFFF' : '#141C24', fontSize: '16px', width: '50%' }}>{translateBodyType[state.car.bodyType]}</span>
                             </div>
                             <div style={{ border: '1px solid #E3E5E5' }}></div>
                             <div style={{ display: 'flex', flexDirection: 'row', gap: '24px', height: 'auto', width: '100%' }}>
-                                <span style={{ color: '#141C24', fontSize: '16px', width: '50%' }}>Цвет</span>
-                                <span style={{ color: '#141C24', fontSize: '16px', width: '50%' }}>{translateColor[state.car.color]}</span>
+                                <span style={{ color: isDark ? '#FFFFFF' : '#141C24', fontSize: '16px', width: '50%' }}>Цвет</span>
+                                <span style={{ color: isDark ? '#FFFFFF' : '#141C24', fontSize: '16px', width: '50%' }}>{translateColor[state.car.color]}</span>
                             </div>
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-                            <h2 style={{ color: '#141C24', margin: 0 }}>Стоимость</h2>
+                            <h2 style={{ color: isDark ? '#FFFFFF' : '#141C24', margin: 0 }}>Стоимость</h2>
                             <div style={{ border: '1px solid #E3E5E5' }}></div>
                             <div style={{ display: 'flex', flexDirection: 'row', gap: '24px', height: 'auto', width: '100%' }}>
-                                <span style={{ color: '#141C24', fontSize: '16px', width: '50%' }}>Аренда на 7 дней</span>
-                                <span style={{ color: '#141C24', fontSize: '16px', width: '50%' }}>{state.formattedToday} - {state.formattedFutureDate}</span>
+                                <span style={{ color: isDark ? '#FFFFFF' : '#141C24', fontSize: '16px', width: '50%' }}>Аренда на 7 дней</span>
+                                <span style={{ color: isDark ? '#FFFFFF' : '#141C24', fontSize: '16px', width: '50%' }}>{state.formattedToday} - {state.formattedFutureDate}</span>
                             </div>
                             <div style={{ border: '1px solid #E3E5E5' }}></div>
                             <div style={{ display: 'flex', flexDirection: 'row', gap: '24px', height: 'auto', width: '100%' }}>
-                                <h3 style={{ color: '#141C24', fontSize: '16px', width: '50%', margin: 0 }}>Итого</h3>
-                                <h3 style={{ color: '#141C24', fontSize: '16px', width: '50%', margin: 0 }}>{state.car.price * 7} &#8381;</h3>
+                                <h3 style={{ color: isDark ? '#FFFFFF' : '#141C24', fontSize: '16px', width: '50%', margin: 0 }}>Итого</h3>
+                                <h3 style={{ color: isDark ? '#FFFFFF' : '#141C24', fontSize: '16px', width: '50%', margin: 0 }}>{state.car.price * 7} &#8381;</h3>
                             </div>
                         </div>
                     </div>
                     <div style={{ display: 'flex', gap: '24px', padding: '16px 0' }}>
-                        <SubmitButton text="Назад" width="100%" colorScheme="secondary" onClick={functions.back} />
-                        <SubmitButton text="Забронировать" width="100%" colorScheme="primary" onClick={functions.rent} />
+                        <SubmitButton text="Назад" width="100%" colorScheme="secondary" isDark={isDark} onClick={functions.back} />
+                        <SubmitButton text="Забронировать" width="100%" colorScheme="primary" isDark={isDark} onClick={functions.rent} />
                     </div>
                 </div>
             </div>

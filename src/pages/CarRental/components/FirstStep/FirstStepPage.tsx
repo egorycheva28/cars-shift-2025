@@ -16,9 +16,10 @@ interface StepOneProps {
     continues: () => void;
     errors: (Partial<Record<keyof CarRentalDTO, string>>);
     handleDateChange: (name: 'startDate' | 'endDate', value: number | null) => void;
+    isDark: boolean;
 }
 
-const FirstStepPage: React.FC<StepOneProps> = ({ carRental, handleChange, continues, errors, handleDateChange }) => {
+const FirstStepPage: React.FC<StepOneProps> = ({ carRental, handleChange, continues, errors, handleDateChange, isDark }) => {
 
     const { state, functions } = useFirstStepPage({ carRental, handleDateChange });
 
@@ -31,7 +32,7 @@ const FirstStepPage: React.FC<StepOneProps> = ({ carRental, handleChange, contin
         }}>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                    <label>Даты аренды</label>
+                    <label style={{ color: isDark ? '#FFFFFF' : '#141C24' }}>Даты аренды</label>
                     <DateRangePicker
                         value={state.value}
                         onChange={functions.handleChange}
@@ -48,6 +49,7 @@ const FirstStepPage: React.FC<StepOneProps> = ({ carRental, handleChange, contin
                 error={!!errors.pickupLocation}
                 helperText={errors.pickupLocation}
                 width="100%"
+                isDark={isDark}
             />
             <InputForm
                 label="Место возврата"
@@ -59,10 +61,11 @@ const FirstStepPage: React.FC<StepOneProps> = ({ carRental, handleChange, contin
                 error={!!errors.returnLocation}
                 helperText={errors.returnLocation}
                 width="100%"
+                isDark={isDark}
             />
             <div style={{ display: 'flex', gap: '24px', padding: '16px 0' }}>
-                <SubmitButton text="Назад" width="100%" colorScheme="secondary" onClick={functions.back} />
-                <SubmitButton text="Продолжить" width="100%" colorScheme="primary" onClick={continues} />
+                <SubmitButton text="Назад" width="100%" colorScheme="secondary" isDark={isDark} onClick={functions.back} />
+                <SubmitButton text="Продолжить" width="100%" colorScheme="primary" isDark={isDark} onClick={continues} />
             </div>
         </div >
     );

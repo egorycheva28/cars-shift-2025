@@ -11,7 +11,7 @@ export const useCarsPage = () => {
 
     const queryParams = new URLSearchParams(location.search);
     const [cars, setCars] = useState<CarDTO[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
+    const [loading, setLoading] = useState<boolean>(false);
     const [pagination, setPagination] = useState<PaginationDTO>(
         {
             limit: 10,

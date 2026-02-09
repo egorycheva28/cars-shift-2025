@@ -4,7 +4,7 @@ import { Pagination } from "@mui/material";
 import { useCarsPage } from "./hooks/useCarsPage";
 import Filters from "./components/Filters";
 
-const CarsPage = () => {
+const CarsPage = ({ isDark }: { isDark: boolean }) => {
 
     const { state, functions } = useCarsPage();
 
@@ -24,7 +24,7 @@ const CarsPage = () => {
             flexDirection: 'column'
         }}>
             <div style={{
-                backgroundColor: '#F3F4F6', height: '74px', borderRadius: '16px', display: 'flex', flexDirection: 'row', gap: '16px',
+                backgroundColor: isDark ? '#344051' : '#F3F4F6', height: '74px', borderRadius: '16px', display: 'flex', flexDirection: 'row', gap: '16px',
                 paddingTop: '16px', paddingBottom: '24px', paddingLeft: '24px', paddingRight: '24px', alignItems: 'center'
             }}>
                 <div style={{ flex: 1 }}>
@@ -37,6 +37,7 @@ const CarsPage = () => {
                         onChange={functions.handleChange}
                         helperText={''}
                         width="100%"
+                        isDark={isDark}
                     />
                 </div>
                 <div style={{ flex: 1 }}>
@@ -49,6 +50,7 @@ const CarsPage = () => {
                         onChange={functions.handleChange}
                         helperText={''}
                         width="100%"
+                        isDark={isDark}
                     />
                 </div>
                 <div style={{
@@ -57,23 +59,23 @@ const CarsPage = () => {
                     height: '100%',
                 }}>
                     <button style={{
-                        backgroundColor: '#344051', borderRadius: '16px', display: 'flex',
+                        backgroundColor: isDark ? '#FFFFFF' : '#344051', borderRadius: '16px', display: 'flex',
                         gap: '8px', border: 'none', padding: '16px 32px', alignItems: 'center', cursor: 'pointer'
                     }} onClick={functions.chooseFilters}>
-                        <img src="../filtersWhite.png" style={{ height: '20px', width: '20px' }} />
-                        <span style={{ color: '#FFFFFF', fontSize: '16px' }}>Фильтры</span>
+                        <img src={isDark ? "../filtersBlack.png" : "../filtersWhite.png"} style={{ height: '20px', width: '20px' }} />
+                        <span style={{ color: isDark ? '#141C24' : '#FFFFFF', fontSize: '16px' }}>Фильтры</span>
                     </button>
                 </div>
             </div>
             {state.isFilter ? (
                 <Filters filters={state.filters} loading={state.loading} handleChange={functions.handleChange} chooseTransmission={functions.chooseTransmission}
-                    chooseColor={functions.chooseColor} cancelFilters={functions.cancelFilters} applyFilters={functions.applyFilters} />
+                    chooseColor={functions.chooseColor} cancelFilters={functions.cancelFilters} applyFilters={functions.applyFilters} isDark={isDark} />
             ) : (
                 null
             )}
             <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                 {state.cars.map(car => (
-                    <CarCard key={car.id} loading={state.loading} car={car} />
+                    <CarCard key={car.id} loading={state.loading} car={car} isDark={isDark} />
                 ))}
             </div>
             <div style={{ marginBottom: '25px', display: 'flex', justifyContent: 'center' }}>

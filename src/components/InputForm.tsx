@@ -18,6 +18,7 @@ interface FormFieldProps {
     options?: Option[];
     error?: boolean;
     helperText?: string;
+    isDark: boolean;
 }
 
 const InputForm: React.FC<FormFieldProps> = ({
@@ -32,9 +33,10 @@ const InputForm: React.FC<FormFieldProps> = ({
     options,
     error = false,
     helperText = '',
+    isDark
 }) => (
     <Box sx={{ margin: 0, display: 'flex', gap: '6px', flexDirection: 'column' }}>
-        <Typography variant="subtitle1" sx={{ color: '#141C24', margin: 0, fontSize: '14px' }}>
+        <Typography variant="subtitle1" sx={{ color: isDark ? '#FFFFFF' : '#141C24', margin: 0, fontSize: '14px' }}>
             {label}
         </Typography>
         <TextField
@@ -57,7 +59,7 @@ const InputForm: React.FC<FormFieldProps> = ({
             InputProps={{
                 sx: {
                     '& .MuiOutlinedInput-input': {
-                        padding: '4px 8px', color: '#637083'
+                        padding: '4px 8px', color: isDark ? '#FFFFFF' : '#637083'
                     },
                 }
             }}
@@ -69,7 +71,7 @@ const InputForm: React.FC<FormFieldProps> = ({
                     borderRadius: '8px',
                     border: '1px solid #CED2DA',
                     padding: '12px',
-                    backgroundColor: '#FFFFFF',
+                    backgroundColor: isDark ? '#141C24' : '#FFFFFF',
                     ...(height ? { height } : {}),
                     '&.Mui-focused fieldset': {
                         color: '#637083'
